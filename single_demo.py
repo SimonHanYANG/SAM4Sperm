@@ -125,12 +125,17 @@ fig, ax = plt.subplots()
 # image = cv2.imread('path_to_image.jpg') # 举例，如果已经加载了图像
 # image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) # OpenCV 加载的图像需要转换为 RGB
 
+import time
+start_time = time.time()  # 获取开始时间
 masks, scores, logits = predictor.predict(
     point_coords=None,
     point_labels=None,
     box=input_box[None, :],
     multimask_output=False,
 )
+end_time = time.time()  # 获取结束时间
+elapsed_time = end_time - start_time  # 计算经过的时间
+print(f"Segmentation spent for {elapsed_time} s.")
 
 plt.figure(figsize=(10, 10))
 plt.imshow(image)
